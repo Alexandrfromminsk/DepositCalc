@@ -1,0 +1,188 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainLayout"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Валюта А"
+            android:id="@+id/currencyA"
+            android:textSize="20dp"
+            android:padding="15dp"/>
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="@dimen/edit_field_width"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/currencyA"
+            android:layout_toRightOf="@+id/currencyA"
+            android:hint="BLR"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Курс валюты"
+            android:id="@+id/exchangeRate"
+            android:layout_below="@+id/currencyA"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <EditText
+            android:layout_width="@dimen/edit_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/excRateNow"
+            android:text="15000"
+            android:layout_below="@+id/currencyA"
+            android:layout_toRightOf="@+id/exchangeRate"
+            android:layout_alignBaseline="@+id/exchangeRate"/>
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Сумма"
+            android:id="@+id/summA"
+            android:layout_below="@+id/exchangeRate"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <EditText
+            android:layout_width="@dimen/edit_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/summAvalue"
+            android:text="15000"
+            android:layout_below="@+id/excRateNow"
+            android:layout_toRightOf="@+id/summA"
+            android:layout_alignBaseline="@+id/summA"/>
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Процент"
+            android:id="@+id/percentA"
+            android:layout_below="@+id/summA"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <EditText
+            android:layout_width="@dimen/edit_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/percentAvalue"
+            android:text="15000"
+            android:layout_below="@+id/summAvalue"
+            android:layout_toRightOf="@+id/percentA"
+            android:layout_alignBaseline="@+id/percentA"/>
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Капитализация"
+            android:id="@+id/capital"
+            android:layout_below="@+id/percentA"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <Spinner
+            android:layout_width="@dimen/edit_field_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/spnCapital"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/percentAvalue"
+            android:layout_alignBottom="@+id/capital"
+            android:layout_below="@+id/percentA"
+            android:layout_alignLeft="@+id/percentAvalue"
+            android:layout_alignStart="@+id/percentAvalue" />
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Причисление %"
+            android:id="@+id/addPercent"
+            android:layout_below="@+id/capital"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addPercentOn"
+            android:layout_below="@+id/spnCapital"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/addPercent"
+            android:layout_alignBaseline="@+id/addPercent" />
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Дата начала:"
+            android:id="@+id/dateBegin"
+            android:layout_below="@+id/addPercent"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <EditText
+            android:layout_width="@dimen/edit_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:id="@+id/starDate"
+            android:text="01.01.1990"
+            android:layout_below="@+id/addPercentOn"
+            android:layout_toRightOf="@+id/dateBegin"
+            android:layout_alignBaseline="@+id/dateBegin"/>
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Срок:"
+            android:id="@+id/timeperiodText"
+            android:layout_below="@+id/dateBegin"
+            android:textSize="20dp"
+            android:padding="15dp" />
+
+        <EditText
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/timeperiod"
+            android:text="30"
+            android:layout_below="@+id/starDate"
+            android:layout_toRightOf="@+id/timeperiodText"
+            android:layout_alignBaseline="@+id/timeperiodText"/>
+
+        <Spinner
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spnTimeperiod"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/timeperiod"
+            android:layout_below="@+id/starDate"
+            android:layout_toRightOf="@+id/timeperiod"
+            android:layout_alignBaseline="@+id/timeperiodText" />
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
