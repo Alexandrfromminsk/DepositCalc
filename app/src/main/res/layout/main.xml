@@ -239,7 +239,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Прирост %"
@@ -261,14 +261,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Прибыль"
-                    android:id="@+id/txtProfitA" />
+                    android:text="Прибыль %"
+                    android:id="@+id/txtProfitA"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="1000000"
+                    android:text="1000000%"
                     android:id="@+id/txtProfitAValue" />
             </TableRow>
 
