@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Дата окончания:"
-            android:id="@+id/dateEnd"
+            android:id="@+id/txtDateEnd"
             android:layout_below="@+id/timeperiodLayout"
             android:textSize="20dp"
             android:padding="15dp" />
@@ -192,41 +192,40 @@
             android:layout_width="@dimen/edit_field_width"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:id="@+id/endDateValue"
+            android:id="@+id/edtEndDate"
             android:text="01.01.1990"
             android:layout_below="@+id/timeperiodLayout"
-            android:layout_toRightOf="@+id/dateEnd"
-            android:layout_alignBaseline="@+id/dateEnd"/>
+            android:layout_toRightOf="@+id/txtDateEnd"
+            android:layout_alignBaseline="@+id/txtDateEnd"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отмена"
+            android:id="@+id/btnCancel"
+            android:layout_below="@+id/txtDateEnd"
+            android:layout_alignParentLeft="true"  />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рассчитать"
+            android:id="@+id/btnCalc"
+            android:layout_alignBaseline="@+id/btnCancel"
+            android:layout_centerHorizontal="true"
+            android:enabled="false"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить"
+            android:id="@+id/btnAdd"
+            android:layout_alignBaseline="@+id/btnCancel"
+            android:layout_alignParentRight="true"/>
 
 
     </RelativeLayout>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Отмена"
-        android:id="@+id/btnCancel"
-        android:layout_below="@+id/mainLayout"
-        android:layout_alignLeft="@+id/mainLayout"  />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Рассчитать"
-        android:id="@+id/btnCalc"
-        android:layout_alignBaseline="@+id/btnCancel"
-        android:layout_centerHorizontal="true"
-        android:enabled="false"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Добавить"
-        android:id="@+id/btnAdd"
-        android:layout_alignBaseline="@+id/btnCancel"
-        android:layout_alignRight="@+id/mainLayout"
-        android:layout_alignEnd="@+id/mainLayout" />
 
 </RelativeLayout>
