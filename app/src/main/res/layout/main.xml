@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mainLayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center">
 
         <TextView
@@ -225,7 +225,76 @@
             android:layout_alignBaseline="@+id/btnCancel"
             android:layout_alignParentRight="true"/>
 
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnCancel"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:stretchColumns="*"
+            android:layout_marginTop="10dp">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Прирост %"
+                    android:id="@+id/txtGrow"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="209%"
+                    android:id="@+id/txtGrowValue" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Прибыль"
+                    android:id="@+id/txtProfitA" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="1000000"
+                    android:id="@+id/txtProfitAValue" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Итого на вкладе"
+                    android:id="@+id/txtFullSumm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="1000000000"
+                    android:id="@+id/txtFullSummValue" />
+            </TableRow>
+        </TableLayout>
+
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>
