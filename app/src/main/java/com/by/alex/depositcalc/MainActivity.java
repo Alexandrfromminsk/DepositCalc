@@ -8,15 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener {
+
+public class MainActivity extends ActionBarActivity implements OnClickListener, OnFocusChangeListener {
 
     Button btnCalc, btnAdd, btnCancel;
     EditText edtCurrencyA, edtExcRateNow, edtSummAvalue, edtPercentA, edtBeginDate, edtTimeperiod, edtDateEnd;
     SharedPreferences DefPref;
+
+    String[] timePeriods = {"days", "months", "years"};
 
     public static final String APP_PREFERENCES = "calcsettings";
     public static final String CURRENCY_A = "BLR";
@@ -46,7 +52,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
 
-        System.out.println("" + Calculator.calcProfit(Integer.parseInt(edtSummAvalue.getText().toString()), Integer.parseInt(edtPercentA.getText().toString()), Integer.parseInt(edtTimeperiod.getText().toString())));
+        Float summA = Float.parseFloat(edtSummAvalue.getText().toString());
+        Float percent = Float.parseFloat(edtPercentA.getText().toString());
+        Integer days = Integer.parseInt(edtTimeperiod.getText().toString());
+
+        GregorianCalendar now = (GregorianCalendar) GregorianCalendar.getInstance( TimeZone.getDefault());
+
+        edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
+
+        edtBeginDate.setOnFocusChangeListener(this);
+
+
     }
 
 
@@ -92,7 +108,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     void setSavedSettings(){
          edtCurrencyA.setText(DefPref.getString(CURRENCY_A, "Bel rubl"));
-         edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
+
          edtDateEnd.setText(DefPref.getString(END_DATE, "01.02.2015"));
          edtExcRateNow.setText(DefPref.getString(EXC_RATE_NOW, "15000"));
          edtSummAvalue.setText(DefPref.getString(SUMM_A_VALUE, "1000000"));
@@ -113,6 +129,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         ed.putString(PERCENT_A, edtPercentA.getText().toString());
 
         ed.commit();
+
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
 
     }
 }
