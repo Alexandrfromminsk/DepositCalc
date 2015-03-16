@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         edtDateEnd = (EditText) findViewById(R.id.edtEndDate);
 
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        setDefSettings();
+        setSavedSettings();
     }
 
 
@@ -71,18 +71,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
     }
     @Override
     protected void onPause(){
-        SharedPreferences.Editor ed = DefPref.edit();
-        ed.putString(TIMEPERIOD, edtTimeperiod.getText().toString());
-        ed.commit();
+        saveSettings();
 
         super.onPause();
     }
 
     @Override
     protected void onDestroy(){
-        SharedPreferences.Editor ed = DefPref.edit();
-        ed.putString(TIMEPERIOD, edtTimeperiod.getText().toString());
-        ed.commit();
+        saveSettings();
 
         super.onDestroy();
     }
@@ -92,7 +88,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     }
 
-    void setDefSettings(){
+    void setSavedSettings(){
          edtCurrencyA.setText(DefPref.getString(CURRENCY_A, "Bel rubl"));
          edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
          edtDateEnd.setText(DefPref.getString(END_DATE, "01.02.2015"));
@@ -100,6 +96,21 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
          edtSummAvalue.setText(DefPref.getString(SUMM_A_VALUE, "1000000"));
          edtPercentA.setText(DefPref.getString(PERCENT_A, "50"));
          edtTimeperiod.setText(DefPref.getString(TIMEPERIOD, "30"));
+
+    }
+
+    void saveSettings(){
+
+        SharedPreferences.Editor ed = DefPref.edit();
+        ed.putString(TIMEPERIOD, edtTimeperiod.getText().toString());
+        ed.putString(CURRENCY_A, edtCurrencyA.getText().toString());
+        ed.putString(BEGIN_DATE, edtBeginDate.getText().toString());
+        ed.putString(END_DATE, edtDateEnd.getText().toString());
+        ed.putString(EXC_RATE_NOW, edtExcRateNow.getText().toString());
+        ed.putString(SUMM_A_VALUE, edtSummAvalue.getText().toString());
+        ed.putString(PERCENT_A, edtPercentA.getText().toString());
+
+        ed.commit();
 
     }
 }
