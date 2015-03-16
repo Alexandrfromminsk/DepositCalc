@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
 
-        Calculator.calcProfit();
+        System.out.println("" + Calculator.calcProfit(Integer.parseInt(edtSummAvalue.getText().toString()), Integer.parseInt(edtPercentA.getText().toString()), Integer.parseInt(edtTimeperiod.getText().toString())));
     }
 
 
