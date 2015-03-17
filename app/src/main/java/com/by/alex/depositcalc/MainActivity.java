@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -20,7 +21,8 @@ import java.util.TimeZone;
 public class MainActivity extends ActionBarActivity implements OnClickListener, OnFocusChangeListener {
 
     Button btnCalc, btnAdd, btnCancel;
-    EditText edtCurrencyA, edtExcRateNow, edtSummAvalue, edtPercentA, edtBeginDate, edtTimeperiod, edtDateEnd;
+    EditText edtCurrencyA, edtExcRateNow, edtSummAvalue, edtPercentA, edtBeginDate, edtTimeperiod;
+    TextView edtDateEnd;
     SharedPreferences DefPref;
 
     String[] timePeriods = {"days", "months", "years"};
@@ -49,6 +51,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtBeginDate = (EditText) findViewById(R.id.edtBeginDate);
         edtTimeperiod = (EditText) findViewById(R.id.edtTimeperiod);
 
+        edtDateEnd = (TextView) findViewById(R.id.edtEndDate);
+
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
 
@@ -61,7 +65,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
 
         edtBeginDate.setOnClickListener(this);
-
 
     }
 
