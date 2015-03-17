@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     Button btnCalc, btnAdd, btnCancel;
     EditText edtCurrencyA, edtExcRateNow, edtSummAvalue, edtPercentA, edtBeginDate, edtTimeperiod;
     TextView edtDateEnd;
+    CheckBox chbAddPercentOn;
     SharedPreferences DefPref;
 
     String[] timePeriods = {"days", "months", "years"};
@@ -35,6 +37,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     public static final String SUMM_A_VALUE = "1000000";
     public static final String PERCENT_A = "56";
     public static final String TIMEPERIOD = "30";
+    public static final String ADD_PERCENT = "if_add_precent";
 
 
 
@@ -50,6 +53,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtPercentA = (EditText) findViewById(R.id.edtPercentA);
         edtBeginDate = (EditText) findViewById(R.id.edtBeginDate);
         edtTimeperiod = (EditText) findViewById(R.id.edtTimeperiod);
+
+        chbAddPercentOn = (CheckBox) findViewById(R.id.chbAddPercentOn);
 
         edtDateEnd = (TextView) findViewById(R.id.edtEndDate);
 
@@ -112,18 +117,19 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     }
 
     void setSavedSettings(){
-         edtCurrencyA.setText(DefPref.getString(CURRENCY_A, "Bel rubl"));
+        edtCurrencyA.setText(DefPref.getString(CURRENCY_A, "Bel rubl"));
 
-         edtDateEnd.setText(DefPref.getString(END_DATE, "01.02.2015"));
-         edtExcRateNow.setText(DefPref.getString(EXC_RATE_NOW, "15000"));
-         edtSummAvalue.setText(DefPref.getString(SUMM_A_VALUE, "1000000"));
-         edtPercentA.setText(DefPref.getString(PERCENT_A, "50"));
-         edtTimeperiod.setText(DefPref.getString(TIMEPERIOD, "30"));
+        edtDateEnd.setText(DefPref.getString(END_DATE, "01.02.2015"));
+        edtExcRateNow.setText(DefPref.getString(EXC_RATE_NOW, "15000"));
+        edtSummAvalue.setText(DefPref.getString(SUMM_A_VALUE, "1000000"));
+        edtPercentA.setText(DefPref.getString(PERCENT_A, "50"));
+        edtTimeperiod.setText(DefPref.getString(TIMEPERIOD, "30"));
+        if (DefPref.contains(ADD_PERCENT))
+            chbAddPercentOn.setChecked(DefPref.getBoolean(ADD_PERCENT, false));
 
     }
 
     void saveSettings(){
-
         SharedPreferences.Editor ed = DefPref.edit();
         ed.putString(TIMEPERIOD, edtTimeperiod.getText().toString());
         ed.putString(CURRENCY_A, edtCurrencyA.getText().toString());
@@ -132,6 +138,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         ed.putString(EXC_RATE_NOW, edtExcRateNow.getText().toString());
         ed.putString(SUMM_A_VALUE, edtSummAvalue.getText().toString());
         ed.putString(PERCENT_A, edtPercentA.getText().toString());
+        ed.putBoolean(ADD_PERCENT, chbAddPercentOn.isChecked());
 
         ed.commit();
 
@@ -139,6 +146,13 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
     @Override
     public void onFocusChange(View view, boolean b) {
+
+
+
+    }
+
+    public boolean ifFieldsWithData(){
+        return (edtExcRateNow.getText().length()>0)&(edtSummAvalue.getText().length()>0)&(edtTimeperiod.getText().length()>0);
 
     }
 }
