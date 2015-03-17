@@ -1,5 +1,6 @@
 package com.by.alex.depositcalc;
 
+import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -47,7 +48,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtPercentA = (EditText) findViewById(R.id.edtPercentA);
         edtBeginDate = (EditText) findViewById(R.id.edtBeginDate);
         edtTimeperiod = (EditText) findViewById(R.id.edtTimeperiod);
-        edtDateEnd = (EditText) findViewById(R.id.edtEndDate);
 
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
         edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
 
-        edtBeginDate.setOnFocusChangeListener(this);
+        edtBeginDate.setOnClickListener(this);
 
 
     }
@@ -103,6 +103,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
     @Override
     public void onClick(View view) {
+        DialogFragment dateDial = new DatePicker();
+        dateDial.show(getSupportFragmentManager(), "datePicker");
 
     }
 

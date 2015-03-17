@@ -189,10 +189,9 @@
                 android:textSize="20dp"
                 android:padding="15dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="@dimen/edit_field_width"
                 android:layout_height="wrap_content"
-                android:inputType="date"
                 android:id="@+id/edtEndDate"
                 android:layout_below="@+id/timeperiodLayout"
                 android:layout_toRightOf="@+id/txtDateEnd"
