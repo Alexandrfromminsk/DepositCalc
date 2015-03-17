@@ -76,6 +76,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtSummAvalue.setOnFocusChangeListener(this);
         edtTimeperiod.setOnFocusChangeListener(this);
         edtPercentA.setOnFocusChangeListener(this);
+        chbAddPercentOn.setOnFocusChangeListener(this);
 
     }
 
