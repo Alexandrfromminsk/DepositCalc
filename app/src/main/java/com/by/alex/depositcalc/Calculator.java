@@ -2,12 +2,18 @@ package com.by.alex.depositcalc;
 
 public  class Calculator {
 
-    public static int calcProfit(int SummBegin, int Percent, int Days){
+    public static Float[] calcProfit(float SummBegin, float Percent, int Days){
 
-        int profit;
+        float profit, fullsumm, percent;
+        Float[] result = new Float[3];
 
-        profit = SummBegin + (SummBegin+Percent+Days)/(365*100);
-        return profit;
+        profit = (SummBegin*Percent*Days)/(365*100);
+        fullsumm = SummBegin + profit;
+        percent = ((fullsumm - SummBegin)/SummBegin)*100;
+        result[0] = percent;
+        result[1] = profit;
+        result[2] = fullsumm;
+        return result;
     }
 
 }

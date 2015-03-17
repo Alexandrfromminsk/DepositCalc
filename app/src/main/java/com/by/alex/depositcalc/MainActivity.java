@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
     Button btnCalc, btnAdd, btnCancel;
     EditText edtCurrencyA, edtExcRateNow, edtSummAvalue, edtPercentA, edtBeginDate, edtTimeperiod;
-    TextView edtDateEnd;
+    TextView edtDateEnd, txtProfitAValue, txtGrowValue, txtFullSummValue;
     CheckBox chbAddPercentOn;
     SharedPreferences DefPref;
 
@@ -57,6 +57,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         chbAddPercentOn = (CheckBox) findViewById(R.id.chbAddPercentOn);
 
         edtDateEnd = (TextView) findViewById(R.id.edtEndDate);
+        txtProfitAValue = (TextView) findViewById(R.id.txtProfitAValue);
+        txtGrowValue = (TextView)findViewById(R.id.txtGrowValue);
+        txtFullSummValue =(TextView)findViewById(R.id.txtFullSummValue);
 
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
@@ -70,6 +73,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
 
         edtBeginDate.setOnClickListener(this);
+        edtSummAvalue.setOnFocusChangeListener(this);
+        edtTimeperiod.setOnFocusChangeListener(this);
+        edtPercentA.setOnFocusChangeListener(this);
 
     }
 
@@ -147,7 +153,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     @Override
     public void onFocusChange(View view, boolean b) {
 
+        if (ifFieldsWithData()) {
+            Float s = Float.parseFloat(edtSummAvalue.getText().toString());
+            Float pr = Float.parseFloat(edtPercentA.getText().toString());
+            Integer d = Integer.parseInt(edtTimeperiod.getText().toString());
+            Float[] profit = Calculator.calcProfit(s, pr, d);
 
+
+            txtProfitAValue.setText(profit[1].toString());
+            txtGrowValue.setText(profit[0].toString());
+            txtFullSummValue.setText(profit[2].toString());
+        }
 
     }
 
