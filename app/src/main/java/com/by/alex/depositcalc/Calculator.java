@@ -2,6 +2,11 @@ package com.by.alex.depositcalc;
 
 public  class Calculator {
 
+    static final int PERCENT = 0;
+    static final int PROFIT = 1;
+    static final int FULLSUMM = 2;
+
+
     public static Float[] calcProfit(float SummBegin, float Percent, int Days){
 
         float profit, fullsumm, percent;

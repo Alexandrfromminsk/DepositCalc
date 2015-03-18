@@ -1,22 +1,21 @@
 package com.by.alex.depositcalc;
 
-import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 
 public class MainActivity extends ActionBarActivity implements OnClickListener, OnFocusChangeListener {
@@ -25,9 +24,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     EditText edtCurrencyA, edtExcRateNow, edtSummAvalue, edtPercentA, edtBeginDate, edtTimeperiod;
     TextView edtDateEnd, txtProfitAValue, txtGrowValue, txtFullSummValue;
     CheckBox chbAddPercentOn;
+    Spinner spnTimeperiod, spnCapital;
     SharedPreferences DefPref;
 
     String[] timePeriods = {"days", "months", "years"};
+    String[] capitals = {"at the end", "montly", "every year", "once per kvartal"};
 
     public static final String APP_PREFERENCES = "calcsettings";
     public static final String CURRENCY_A = "BLR";
@@ -61,6 +62,19 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         txtGrowValue = (TextView)findViewById(R.id.txtGrowValue);
         txtFullSummValue =(TextView)findViewById(R.id.txtFullSummValue);
 
+        spnTimeperiod = (Spinner) findViewById(R.id.spnTimeperiod);
+        spnCapital = (Spinner) findViewById(R.id.spnCapital);
+
+        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, timePeriods);
+        timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnTimeperiod.setAdapter(timeAdapter);
+        spnTimeperiod.setSelection(0);
+
+        ArrayAdapter<String> capitalAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, capitals);
+        capitalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnCapital.setAdapter(capitalAdapter);
+        spnCapital.setSelection(0);
+
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
 
@@ -68,9 +82,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         Float percent = Float.parseFloat(edtPercentA.getText().toString());
         Integer days = Integer.parseInt(edtTimeperiod.getText().toString());
 
-        GregorianCalendar now = (GregorianCalendar) GregorianCalendar.getInstance( TimeZone.getDefault());
+        //GregorianCalendar now = (GregorianCalendar) GregorianCalendar.getInstance( TimeZone.getDefault());
 
-        edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
+        //edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
 
         edtBeginDate.setOnClickListener(this);
         edtSummAvalue.setOnFocusChangeListener(this);
@@ -160,10 +174,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
             Integer d = Integer.parseInt(edtTimeperiod.getText().toString());
             Float[] profit = Calculator.calcProfit(s, pr, d);
 
+            txtGrowValue.setText(profit[Calculator.PERCENT].toString());
+            txtProfitAValue.setText(profit[Calculator.PROFIT].toString());
+            txtFullSummValue.setText(profit[Calculator.FULLSUMM].toString());
 
-            txtProfitAValue.setText(profit[1].toString());
-            txtGrowValue.setText(profit[0].toString());
-            txtFullSummValue.setText(profit[2].toString());
         }
 
     }
