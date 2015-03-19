@@ -165,6 +165,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
     }
 
+    public void getData() {
+        Float s = Float.parseFloat(edtSummAvalue.getText().toString());
+        Float pr = Float.parseFloat(edtPercentA.getText().toString());
+        Integer d = Integer.parseInt(edtTimeperiod.getText().toString());
+        int dmy = spnTimeperiod.getSelectedItemPosition();
+        if (dmy==1) d *= 30;
+        if (dmy==2) d *= 365;
+        boolean add = chbAddPercentOn.isChecked();
+
+    }
+
     @Override
     public void onFocusChange(View view, boolean b) {
 

@@ -5,8 +5,12 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 //http://androiddocs.ru/datepickerdialog-vidzhet-vybora-daty/
 public class DatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener{
@@ -28,13 +32,29 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
     public void onDateSet(android.widget.DatePicker datePicker, int year, int month, int day) {
 
         EditText date= (EditText)getActivity().findViewById(R.id.edtBeginDate);
-        date.setText(day + "-" + month + "-" + year);
+
+        date.setText(day + "-" + (month+1) + "-" + year);
+
+        GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+        cal.set(year, month, day);
+
+        EditText timeperiod = (EditText) getActivity().findViewById(R.id.edtTimeperiod);
+        int tpr = Integer.parseInt(timeperiod.getText().toString());
+
+        Spinner spnTimeperiod = (Spinner) getActivity().findViewById(R.id.spnTimeperiod);
+        int dmy = spnTimeperiod.getSelectedItemPosition();
+
+        if (dmy==0) cal.add(Calendar.DAY_OF_MONTH, tpr);
+        else if (dmy==1) cal.add(Calendar.MONTH, tpr);
+        else cal.add(Calendar.YEAR,tpr);
+
+
+        TextView dateEnd = (TextView) getActivity().findViewById(R.id.edtEndDate);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        dateEnd.setText(sdf.format(cal.getTime()).toString());
+
 
     }
 
-    public void setDateAtView(android.widget.DatePicker datePicker, int year, int month, int day, EditText v) {
-
-        v.setText(day + "-" + month + "-" + year);
-
-    }
 }
