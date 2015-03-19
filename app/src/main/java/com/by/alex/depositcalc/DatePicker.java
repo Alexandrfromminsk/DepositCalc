@@ -5,12 +5,8 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 //http://androiddocs.ru/datepickerdialog-vidzhet-vybora-daty/
 public class DatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener{
@@ -35,6 +31,7 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
 
         date.setText(day + "-" + (month+1) + "-" + year);
 
+/*
         GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
         cal.set(year, month, day);
 
@@ -53,8 +50,9 @@ public class DatePicker extends DialogFragment implements DatePickerDialog.OnDat
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         dateEnd.setText(sdf.format(cal.getTime()).toString());
-
+*/
 
     }
+
 
 }

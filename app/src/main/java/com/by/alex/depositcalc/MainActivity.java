@@ -10,12 +10,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class MainActivity extends ActionBarActivity implements OnClickListener, OnFocusChangeListener {
@@ -87,6 +95,21 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         //edtBeginDate.setText(DefPref.getString(BEGIN_DATE, "01.01.2015"));
 
         edtBeginDate.setOnClickListener(this);
+        edtTimeperiod.setOnClickListener(this);
+
+        spnTimeperiod.setOnItemSelectedListener(new OnItemSelectedListener() {
+                                                    @Override
+                                                    public void onItemSelected(AdapterView<?> parent, View view,
+                                                                               int position, long id) {
+                                                       setEndDate();
+                                                    }
+
+                                                    @Override
+                                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                                    }
+                                                });
+
         edtSummAvalue.setOnFocusChangeListener(this);
         edtTimeperiod.setOnFocusChangeListener(this);
         edtPercentA.setOnFocusChangeListener(this);
@@ -134,6 +157,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     public void onClick(View view) {
         DialogFragment dateDial = new DatePicker();
         dateDial.show(getSupportFragmentManager(), "datePicker");
+        setEndDate();
 
     }
 
@@ -165,7 +189,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
     }
 
-    public void getData() {
+    public void getAllData() {
         Float s = Float.parseFloat(edtSummAvalue.getText().toString());
         Float pr = Float.parseFloat(edtPercentA.getText().toString());
         Integer d = Integer.parseInt(edtTimeperiod.getText().toString());
@@ -196,5 +220,33 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     public boolean ifFieldsWithData(){
         return (edtExcRateNow.getText().length()>0)&(edtSummAvalue.getText().length()>0)&(edtTimeperiod.getText().length()>0);
 
+    }
+
+    public  void setEndDate(){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+        try {
+            Date date = sdf.parse(edtBeginDate.getText().toString());
+            cal.setTime(date);
+
+
+
+        int tpr = Integer.parseInt(edtTimeperiod.getText().toString());
+
+        //Spinner spnTimeperiod = (Spinner) findViewById(R.id.spnTimeperiod);
+        int dmy = spnTimeperiod.getSelectedItemPosition();
+
+        if (dmy==0) cal.add(Calendar.DAY_OF_MONTH, tpr);
+        else if (dmy==1) cal.add(Calendar.MONTH, tpr);
+        else cal.add(Calendar.YEAR,tpr);
+
+
+        edtDateEnd.setText(sdf.format(cal.getTime()).toString());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

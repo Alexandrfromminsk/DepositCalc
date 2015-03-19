@@ -15,9 +15,9 @@ public  class Calculator {
         profit = (SummBegin*Percent*Days)/(365*100);
         fullsumm = SummBegin + profit;
         percent = ((fullsumm - SummBegin)/SummBegin)*100;
-        result[0] = percent;
-        result[1] = profit;
-        result[2] = fullsumm;
+        result[PERCENT] = percent;
+        result[PROFIT] = profit;
+        result[FULLSUMM] = fullsumm;
         return result;
     }
 
@@ -29,9 +29,9 @@ public  class Calculator {
         profit = (SummBegin*Percent*Days)/(365*100);
         fullsumm = SummBegin + profit;
         percent = ((fullsumm - SummBegin)/SummBegin)*100;
-        result[0] = percent;
-        result[1] = profit;
-        result[2] = fullsumm;
+        result[PERCENT] = percent;
+        result[PROFIT] = profit;
+        result[FULLSUMM] = fullsumm;
         return result;
     }
 
