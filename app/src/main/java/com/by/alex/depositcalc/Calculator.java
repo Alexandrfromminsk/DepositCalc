@@ -20,18 +20,27 @@ public  class Calculator {
         result[FULLSUMM] = fullsumm;
         return result;
     }
-
+//difficult percents
     public static Float[] calcProfit(float SummBegin, float Percent, int Days, int Capitalization){
 
-        float profit, fullsumm, percent;
         Float[] result = new Float[3];
 
-        profit = (SummBegin*Percent*Days)/(365*100);
-        fullsumm = SummBegin + profit;
-        percent = ((fullsumm - SummBegin)/SummBegin)*100;
-        result[PERCENT] = percent;
-        result[PROFIT] = profit;
-        result[FULLSUMM] = fullsumm;
+        if (Capitalization==1) {
+
+            float profit, fullsumm, percent;
+
+
+
+            fullsumm = (float) (SummBegin *Math.pow(1+Percent/(365*100),Days));
+            profit = fullsumm - SummBegin;
+            percent = (profit/ SummBegin) * 100;
+            result[PERCENT] = percent;
+            result[PROFIT] = profit;
+            result[FULLSUMM] = fullsumm;
+
+
+        }
+
         return result;
     }
 
