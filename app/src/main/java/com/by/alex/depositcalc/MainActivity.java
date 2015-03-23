@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     SharedPreferences DefPref;
 
     String[] timePeriods = {"days", "months", "years"};
-    String[] capitals = {"at the end", "montly", "every year", "once per kvartal"};
+    String[] capitals = {"at the end", "daily", "montly", "once per kvartal", "every year",};
 
     public static final String APP_PREFERENCES = "calcsettings";
     public static final String CURRENCY_A = "BLR";
@@ -82,6 +82,18 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         capitalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spnCapital.setAdapter(capitalAdapter);
         spnCapital.setSelection(0);
+        spnCapital.setOnItemSelectedListener(new OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view,
+                                                       int position, long id) {
+                                calc_it();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
 
         DefPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setSavedSettings();
@@ -188,7 +200,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         ed.commit();
 
     }
-
+//not used
     public void getAllData() {
         Float s = Float.parseFloat(edtSummAvalue.getText().toString());
         Float pr = Float.parseFloat(edtPercentA.getText().toString());
@@ -203,11 +215,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     @Override
     public void onFocusChange(View view, boolean b) {
 
+            calc_it();
+
+    }
+
+    public void calc_it(){
         if (ifFieldsWithData()) {
             Float s = Float.parseFloat(edtSummAvalue.getText().toString());
             Float pr = Float.parseFloat(edtPercentA.getText().toString());
             Integer d = Integer.parseInt(edtTimeperiod.getText().toString());
-            Float[] profit = Calculator.calcProfit(s, pr, d);
+            int cap = spnCapital.getSelectedItemPosition();
+            Float[] profit = Calculator.calcProfit(s, pr, d,cap);
 
             txtGrowValue.setText(profit[Calculator.PERCENT].toString());
             txtProfitAValue.setText(profit[Calculator.PROFIT].toString());
@@ -216,6 +234,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         }
 
     }
+
 
     public boolean ifFieldsWithData(){
         return (edtExcRateNow.getText().length()>0)&(edtSummAvalue.getText().length()>0)&(edtTimeperiod.getText().length()>0);
