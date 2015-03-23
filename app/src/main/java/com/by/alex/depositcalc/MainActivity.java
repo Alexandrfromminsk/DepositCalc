@@ -113,7 +113,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
                                                     @Override
                                                     public void onItemSelected(AdapterView<?> parent, View view,
                                                                                int position, long id) {
-                                                       setEndDate();
+                                                        setEndDate();
+                                                        calc_it();
                                                     }
 
                                                     @Override
@@ -125,7 +126,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtSummAvalue.setOnFocusChangeListener(this);
         edtTimeperiod.setOnFocusChangeListener(this);
         edtPercentA.setOnFocusChangeListener(this);
-        chbAddPercentOn.setOnFocusChangeListener(this);
+
+        chbAddPercentOn.setOnClickListener(this);
+        edtSummAvalue.setOnClickListener(this);
+
+        calc_it();
 
     }
 
@@ -167,9 +172,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
     @Override
     public void onClick(View view) {
-        DialogFragment dateDial = new DatePicker();
-        dateDial.show(getSupportFragmentManager(), "datePicker");
-        setEndDate();
+
+        if (view.getId()!=R.id.edtBeginDate) calc_it();
+        else   { DialogFragment dateDial = new DatePicker();
+                dateDial.show(getSupportFragmentManager(), "datePicker");
+                setEndDate();
+                }
+
+
 
     }
 
@@ -215,7 +225,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     @Override
     public void onFocusChange(View view, boolean b) {
 
-            calc_it();
+        calc_it();
+
+        switch (view.getId()) {
+            case R.id.edtTimeperiod:
+                // Timeperiod field
+                setEndDate();
+                break;
+        }
 
     }
 
@@ -224,6 +241,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
             Float s = Float.parseFloat(edtSummAvalue.getText().toString());
             Float pr = Float.parseFloat(edtPercentA.getText().toString());
             Integer d = Integer.parseInt(edtTimeperiod.getText().toString());
+            int dmy = spnTimeperiod.getSelectedItemPosition();
+            if (dmy==1) d*=30;
+            if (dmy==2) d*=365;
             int cap = spnCapital.getSelectedItemPosition();
             Float[] profit = Calculator.calcProfit(s, pr, d,cap);
 
