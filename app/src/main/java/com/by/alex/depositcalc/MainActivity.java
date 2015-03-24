@@ -250,7 +250,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
             txtGrowValue.setText(profit[Calculator.PERCENT].toString());
             txtProfitAValue.setText(profit[Calculator.PROFIT].toString());
             txtFullSummValue.setText(profit[Calculator.FULLSUMM].toString());
-
         }
 
     }
