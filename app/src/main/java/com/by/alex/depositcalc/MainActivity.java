@@ -57,6 +57,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnCalc = (Button) findViewById(R.id.btnCalc);
+        btnCancel = (Button) findViewById(R.id.btnCancel);
+
         edtCurrencyA = (EditText) findViewById(R.id.edtCurrencyA);
         edtExcRateNow = (EditText) findViewById(R.id.edtExcRateNow);
         edtSummAvalue = (EditText) findViewById(R.id.edtSummAvalue);
@@ -130,6 +134,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 
         chbAddPercentOn.setOnClickListener(this);
         edtSummAvalue.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
 
         calc_it();
 
@@ -185,6 +190,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
                 Intent compareIntent = new Intent(MainActivity.this, ComparisonActivity.class);
                 startActivity(compareIntent);
                 break;
+
             default:
                 calc_it();
         }
