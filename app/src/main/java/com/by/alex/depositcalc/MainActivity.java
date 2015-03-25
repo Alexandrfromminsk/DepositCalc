@@ -1,6 +1,7 @@
 package com.by.alex.depositcalc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -110,18 +111,18 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
         edtTimeperiod.setOnClickListener(this);
 
         spnTimeperiod.setOnItemSelectedListener(new OnItemSelectedListener() {
-                                                    @Override
-                                                    public void onItemSelected(AdapterView<?> parent, View view,
-                                                                               int position, long id) {
-                                                        setEndDate();
-                                                        calc_it();
-                                                    }
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                setEndDate();
+                calc_it();
+            }
 
-                                                    @Override
-                                                    public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                                                    }
-                                                });
+            }
+        });
 
         edtSummAvalue.setOnFocusChangeListener(this);
         edtTimeperiod.setOnFocusChangeListener(this);
@@ -173,13 +174,20 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
     @Override
     public void onClick(View view) {
 
-        if (view.getId()!=R.id.edtBeginDate) calc_it();
-        else   { DialogFragment dateDial = new DatePicker();
+        switch (view.getId()) {
+            case R.id.edtBeginDate:
+                DialogFragment dateDial = new DatePicker();
                 dateDial.show(getSupportFragmentManager(), "datePicker");
                 setEndDate();
-                }
+                break;
 
-
+            case R.id.btnAdd:
+                Intent compareIntent = new Intent(MainActivity.this, ComparisonActivity.class);
+                startActivity(compareIntent);
+                break;
+            default:
+                calc_it();
+        }
 
     }
 
